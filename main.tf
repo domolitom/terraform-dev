@@ -18,3 +18,14 @@ resource "azurerm_resource_group" "test-rg" {
     environment = "dev"
   }
 }
+
+resource "azurerm_virtual_network" "test-vnet" {
+  name                = "learning-tf-vnet"
+  resource_group_name = azurerm_resource_group.test-rg.name
+  location            = azurerm_resource_group.test-rg.location
+  address_space       = ["10.123.0.0/16"]
+
+  tags = {
+    environment = "dev"
+  }
+}
