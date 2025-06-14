@@ -10,3 +10,11 @@ terraform {
 provider "azurerm" {
   features {}
 }
+
+resource "azurerm_resource_group" "test-rg" {
+  name     = "learning-tf-rg"
+  location = "West Europe"
+  tags = {
+    environment = "dev"
+  }
+}
