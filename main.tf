@@ -46,3 +46,17 @@ resource "azurerm_network_security_group" "test-sg" {
     environment = "dev"
   }
 }
+
+resource "azurerm_network_security_rule" "test-dev-rule" {
+  name                        = "test-dev-rule"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "*"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = azurerm_resource_group.test-rg.name
+  network_security_group_name = azurerm_network_security_group.test-sg.name
+}
