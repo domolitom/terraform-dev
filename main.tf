@@ -60,3 +60,19 @@ resource "azurerm_network_security_rule" "test-dev-rule" {
   resource_group_name         = azurerm_resource_group.test-rg.name
   network_security_group_name = azurerm_network_security_group.test-sg.name
 }
+
+resource "azurerm_subnet_network_security_group_association" "test-subnet-sga" {
+  subnet_id                 = azurerm_subnet.test-subnet.id
+  network_security_group_id = azurerm_network_security_group.test-sg.id
+}
+
+resource "azurerm_public_ip" "test-ip" {
+  name                = "learning-tf-ip"
+  location            = azurerm_resource_group.test-rg.location
+  resource_group_name = azurerm_resource_group.test-rg.name
+  allocation_method   = "Dynamic"
+
+  tags = {
+    environment = "dev"
+  }
+}
