@@ -93,3 +93,29 @@ resource "azurerm_network_interface" "test-nic" {
     environment = "dev"
   }
 }
+
+resource "azurerm_linux_virtual_machine" "test-vm" {
+  name                  = "learning-tf-vm"
+  location              = azurerm_resource_group.test-rg.location
+  resource_group_name   = azurerm_resource_group.test-rg.name
+  size                  = "Standard_B1s"
+  admin_username        = "adminuser"
+  admin_password        = "testvmpwd"
+  network_interface_ids = [azurerm_network_interface.test-nic.id]
+
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
+
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "UbuntuServer"
+    sku       = "22_04-lts"
+    version   = "latest"
+  }
+
+  tags = {
+    environment = "dev"
+  }
+}
