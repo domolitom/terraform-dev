@@ -103,6 +103,10 @@ resource "azurerm_linux_virtual_machine" "test-vm" {
   admin_password        = "testvmpwd"
   network_interface_ids = [azurerm_network_interface.test-nic.id]
 
+  admin_ssh_key {
+    username   = "adminuser"
+    public_key = file("~/.ssh/test_azurekey.pub")
+  }
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
