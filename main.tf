@@ -103,6 +103,8 @@ resource "azurerm_linux_virtual_machine" "test-vm" {
   admin_password        = "P@ssw0rd1234!"
   network_interface_ids = [azurerm_network_interface.test-nic.id]
 
+  custom_data = filebase64("customdata.tpl")
+
   admin_ssh_key {
     username   = "adminuser"
     public_key = file("~/.ssh/test_azurekey.pub")
