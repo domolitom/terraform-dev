@@ -76,3 +76,20 @@ resource "azurerm_public_ip" "test-ip" {
     environment = "dev"
   }
 }
+
+resource "azurerm_network_interface" "test-nic" {
+  name                = "learning-tf-nic"
+  location            = azurerm_resource_group.test-rg.location
+  resource_group_name = azurerm_resource_group.test-rg.name
+
+  ip_configuration {
+    name                          = "internal"
+    subnet_id                     = azurerm_subnet.test-subnet.id
+    private_ip_address_allocation = "Dynamic"
+    public_ip_address_id          = azurerm_public_ip.test-ip.id
+  }
+
+  tags = {
+    environment = "dev"
+  }
+}
