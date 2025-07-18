@@ -94,34 +94,34 @@ resource "azurerm_network_interface" "test-nic" {
   }
 }
 
-# resource "azurerm_linux_virtual_machine" "test-vm" {
-#   name                  = "learning-tf-vm"
-#   location              = azurerm_resource_group.test-rg.location
-#   resource_group_name   = azurerm_resource_group.test-rg.name
-#   size                  = "Standard_B1s"
-#   admin_username        = "adminuser"
-#   admin_password        = "P@ssw0rd1234!"
-#   network_interface_ids = [azurerm_network_interface.test-nic.id]
+resource "azurerm_linux_virtual_machine" "test-vm" {
+  name                  = "learning-tf-vm"
+  location              = azurerm_resource_group.test-rg.location
+  resource_group_name   = azurerm_resource_group.test-rg.name
+  size                  = "Standard_B1s"
+  admin_username        = "adminuser"
+  admin_password        = "P@ssw0rd1234!"
+  network_interface_ids = [azurerm_network_interface.test-nic.id]
 
-#   custom_data = filebase64("customdata.tpl")
+  custom_data = filebase64("customdata.tpl")
 
-#   admin_ssh_key {
-#     username   = "adminuser"
-#     public_key = file("~/.ssh/test_azurekey.pub")
-#   }
-#   os_disk {
-#     caching              = "ReadWrite"
-#     storage_account_type = "Standard_LRS"
-#   }
+  admin_ssh_key {
+    username   = "adminuser"
+    public_key = file("~/.ssh/test_azurekey.pub")
+  }
+  os_disk {
+    caching              = "ReadWrite"
+    storage_account_type = "Standard_LRS"
+  }
 
-#   source_image_reference {
-#     publisher = "Canonical"
-#     offer     = "0001-com-ubuntu-server-jammy"
-#     sku       = "22_04-lts"
-#     version   = "latest"
-#   }
+  source_image_reference {
+    publisher = "Canonical"
+    offer     = "0001-com-ubuntu-server-jammy"
+    sku       = "22_04-lts"
+    version   = "latest"
+  }
 
-#   tags = {
-#     environment = "dev"
-#   }
-# }
+  tags = {
+    environment = "dev"
+  }
+}
