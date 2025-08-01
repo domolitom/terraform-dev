@@ -124,4 +124,11 @@ resource "azurerm_linux_virtual_machine" "test-vm" {
   tags = {
     environment = "dev"
   }
+
+  lifecycle {
+    ignore_changes = [
+      admin_password,
+      custom_data,
+    ]
+  }
 }
