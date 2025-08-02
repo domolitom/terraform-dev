@@ -125,4 +125,9 @@ resource "azurerm_linux_virtual_machine" "test-vm" {
     environment = "dev"
   }
 
+  depends_on = [
+    azurerm_network_interface.test-nic,
+    azurerm_subnet_network_security_group_association.test-subnet-sga,
+  ]
+
 }
