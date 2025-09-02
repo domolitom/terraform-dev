@@ -93,3 +93,26 @@ resource "azurerm_network_interface" "test-nic" {
     environment = "dev"
   }
 }
+
+resource "azurerm_kubernetes_cluster" "test-aks" {
+  name                = "learning-tf-aks"
+  location            = azurerm_resource_group.test-rg.location
+  resource_group_name = azurerm_resource_group.test-rg.name
+  dns_prefix          = "learning-tf-aks"
+
+  agent_pool {
+    name    = "default"
+    count   = 1
+    vm_size = "Standard_DS2_v2"
+    os_type = "Linux"
+    mode    = "System"
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  tags = {
+    environment = "dev"
+  }
+}
