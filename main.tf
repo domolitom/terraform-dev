@@ -100,12 +100,10 @@ resource "azurerm_kubernetes_cluster" "test-aks" {
   resource_group_name = azurerm_resource_group.test-rg.name
   dns_prefix          = "learning-tf-aks"
 
-  agent_pool {
-    name    = "default"
-    count   = 1
-    vm_size = "Standard_DS2_v2"
-    os_type = "Linux"
-    mode    = "System"
+  default_node_pool {
+    name       = "default"
+    node_count = 1
+    vm_size    = "Standard_DS2_v2"
   }
 
   identity {
