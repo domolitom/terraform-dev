@@ -114,3 +114,7 @@ resource "azurerm_kubernetes_cluster" "test-aks" {
     environment = "dev"
   }
 }
+
+output "resource_group_name" {
+  value = azurerm_resource_group.test-rg.name
+}
