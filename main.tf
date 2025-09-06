@@ -118,3 +118,8 @@ resource "azurerm_kubernetes_cluster" "test-aks" {
 output "resource_group_name" {
   value = azurerm_resource_group.test-rg.name
 }
+
+output "kube_config" {
+  value     = azurerm_kubernetes_cluster.test-aks.kube_config_raw
+  sensitive = true
+}
